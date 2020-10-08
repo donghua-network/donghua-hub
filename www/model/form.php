@@ -32,7 +32,7 @@ class form extends table{
 
     function curl($c_url, $headers, $post=false){
         $curl=curl_init($c_url);
-        if($post!='auth'){
+        if($post){
             curl_setopt($curl, CURLOPT_POST, true);
             curl_setopt($curl, CURLOPT_POSTFIELDS, $post);
         }
@@ -50,7 +50,6 @@ class form extends table{
             'redirect' => curl_getinfo($curl, CURLINFO_REDIRECT_URL),
             'status'   => curl_getinfo($curl, CURLINFO_HTTP_CODE)
         );
-
     }
 
 
