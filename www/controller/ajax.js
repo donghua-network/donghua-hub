@@ -71,6 +71,10 @@ $(document).ready(function(){
             $('#data').loadData({'action': clickBtnValue, 'loadtxt': 'Exporting', 'table':table}, 'view/pdf-viewer');
         }else if(clickBtnValue=='destroy'){
             $('#data').loadData({'action': clickBtnValue, 'loadtxt': 'Resetting'}, 'ajax');
+        }else if(clickBtnValue=='log in'){
+            $('#login').formData({ 'loadtxt': 'Loading', 'responsediv':'#form'});
+        }else if(clickBtnValue=='save'){
+            $('#date').formData({'action': clickBtnValue, 'loadtxt': 'Loading', 'resposnediv':'#form'}, afterAjax);
         }else{
             $('#date').formData({'action': clickBtnValue, 'loadtxt': 'Loading', 'responsediv':'#data'}, afterAjax);
         }
