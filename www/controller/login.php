@@ -1,4 +1,26 @@
 <?php
+require_once('includes/config.php');
 $user = new \model\user();
-print_r(array($user->curl('https://discord.com/api/oauth2/authorize?client_id=268616600402264066&redirect_uri=http%3A%2F%2Flocalhost%3A8090&grant_type=authorization_code&scope=identify&client_secret=OnU8p14L13-pdyrBgxxqcTDqiZdSpjWx', "x-www-form-urlencoded")));
+if ( isset($_SESSION['discord']) || isset($_GET['error']) ) {
+   website::website_redirect($website['url']);
+}
+else if ( isset($_GET['code']) ) {
+   $auth = website::discord_auth($website['discord_client'], $website['discord_secret'], $website['discord_scopes'], $_GET['code']);
+   if ( $auth ) {
+      $user = website::discord_user_info($auth['access_token']);
+      if ( $user ) {
+         $_SESSION['discord']['access-token']     = $auth['access_token'];
+         $_SESSION['discord']['refresh-token']    = $auth['refresh_token'];
+         $_SESSION['discord']['token-expiration'] = time() + $auth['expires_in'];
+         $_SESSION['discord']['user-id']          = $user['id'];
+         $_SESSION['discord']['avatar-id']        = $user['avatar'];
+         $_SESSION['discord']['username']         = $user['username'];
+         $_SESSION['discord']['discriminator']    = $user['discriminator'];
+         website::website_redirect($website['url']);
+      }
+   }
+}
+else {
+   website::discord_auth_redirect($website['discord_client'], $website['discord_scopes']);
+}
 ?>
