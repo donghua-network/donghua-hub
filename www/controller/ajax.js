@@ -89,8 +89,6 @@ $(document).ready(function(){
         }else if(clickBtnValue=='print'){
             table=getTable('.table-responsive');
             $('#data').loadData({'action': clickBtnValue, 'loadtxt': 'Exporting', 'table':table}, 'view/pdf-viewer');
-        }else if(clickBtnValue=='destroy'){
-            $('#data').loadData({'action': clickBtnValue, 'loadtxt': 'Resetting'}, 'ajax');
         }else if(clickBtnValue=='log in'){
             $('#login').formData({ 'loadtxt': 'Loading', 'responsediv':'#form'});
         }else{
