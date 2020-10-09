@@ -50,6 +50,10 @@ $(document).ready(function(){
         }
     }
 
+    function afterAuth(){
+        $('#authorize').submit();
+    }
+
     function showfilter(){
         table=$('.table-responsive').html();
         if(table!==undefined)
