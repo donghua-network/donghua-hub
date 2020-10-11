@@ -28,7 +28,7 @@
 
 $(document).ready(function(){
 
-    $('#form').loadData({'action':'home', 'loadtxt':'Creating form', 'view':'home'}, 'view', afterFormgen);
+    $('#block').loadData({'action':'home', 'loadtxt':'Creating form', 'view':'home'}, 'view', afterFormgen);
 
     function showResphead(entry){
         console.log(entry);
@@ -90,9 +90,9 @@ $(document).ready(function(){
             table=getTable('.table-responsive');
             $('#data').loadData({'action': clickBtnValue, 'loadtxt': 'Exporting', 'table':table}, 'view/pdf-viewer');
         }else if(clickBtnValue=='log in'){
-            $('#login').formData({ 'loadtxt': 'Loading', 'responsediv':'#form'});
+            $('#login').formData({ 'loadtxt': 'Loading', 'responsediv':'#block'});
         }else{
-            $('#date').formData({'action': clickBtnValue, 'loadtxt': 'Loading', 'responsediv':'#data'}, afterAjax);
+            $('#form').formData({'action': clickBtnValue, 'loadtxt': 'Loading', 'responsediv':'#data'}, afterAjax);
         }
     }
 
@@ -122,13 +122,13 @@ $(document).ready(function(){
         data = { 'loadtxt':'Loading', 'view':linkHref};
         if(menu!=undefined)
             data['class'] = menu;
-        $('#form').loadData(data, 'view', afterFormgen);
+        $('#block').loadData(data, 'view', afterFormgen);
     }
 
     function ajaxLink(linkHref, deze){
         var linkID = $(deze).attr('id');
         if(linkID!==undefined){
-            $('#date').formData({'action': 'transaction', 'loadtxt': 'Sorting', 'order':linkHref, 'linkId':linkID, 'responsediv':'#data'}, afterAjax);
+            $('#form').formData({'action': 'transaction', 'loadtxt': 'Sorting', 'order':linkHref, 'linkId':linkID, 'responsediv':'#data'}, afterAjax);
 
         }else{
             loadLink(linkHref, deze);
@@ -139,6 +139,6 @@ $(document).ready(function(){
     $('.lnk').ajaxInput('href', ajaxLink);
 
     $('#filter').debounceKeyup(function(){
-        $('#date').formData({'action':'filter','criteria':$(this).val(), 'loadtxt':'Filtering', 'responsediv':'#data'});
+        $('#form').formData({'action':'filter','criteria':$(this).val(), 'loadtxt':'Filtering', 'responsediv':'#data'});
     });
 });
