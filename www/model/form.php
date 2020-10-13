@@ -30,7 +30,7 @@ class form extends table{
         return true;
     }
 
-    function curl($c_url, $content_type, $post=false){
+    function curl($c_url, $headers, $post=false){
         $curl=curl_init($c_url);
         if($post!='auth'){
             curl_setopt($curl, CURLOPT_POST, true);
@@ -38,22 +38,18 @@ class form extends table{
         }
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HEADER, false);
-        if(is_array($content_type))
-            curl_setopt($curl, CURLOPT_HTTPHEADER, $content_type);
+        if(is_array($headers))
+            curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
         else
-            curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-type: ".$content_type));
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-type: ".$headers));
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($curl, CURLINFO_HEADER_OUT, true);
         $result = curl_exec($curl);
-        if(!$post){
-            $this->response = json_decode($result);
-        }else{
-            return array(
-                'data'     => $result,
-                'redirect' => curl_getinfo($curl, CURLINFO_REDIRECT_URL),
-                'status'   => curl_getinfo($curl, CURLINFO_HTTP_CODE)
-            );
-        }
+        return array(
+            'data'     => $result,
+            'redirect' => curl_getinfo($curl, CURLINFO_REDIRECT_URL),
+            'status'   => curl_getinfo($curl, CURLINFO_HTTP_CODE)
+        );
 
     }
 
