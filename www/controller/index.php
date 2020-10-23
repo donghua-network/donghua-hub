@@ -26,7 +26,6 @@ if(!empty($_POST['controller'])){
         require('logout.php');
     });
     $router->post('/service/data', function($request){
-        print_r($_POST);
         return json_encode($request->getBody());
     });
 }
