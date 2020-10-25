@@ -6,7 +6,19 @@ services:
         - '8181:80'
       volumes:
         - 'dhroot:/var/www'
-        - 'data:/var/lib/mysql-data'
+      depends_on:
+        - mariadb
+    mariadb:
+      image: 'bitnami/mariadb:10.3'
+      environment:
+          # ALLOW_EMPTY_PASSWORD=yes
+        - MARIADB_ROOT_PASSWORD=root
+          #- MARIADB_USER=root
+          #- MARIADB_PASSWORD=root
+        - MARIADB_DATABASE=test
+      volumes:
+        - 'database:/bitnami'
+
     localtunnel:
       image: 'efrecon/localtunnel'
       links:
@@ -23,9 +35,5 @@ volumes:
         type: none
         o: bind
         device: "${PWD}/www"
-  data:
+  database:
     driver: local
-    driver_opts:
-        type: none
-        o: bind
-        device: "${PWD}/www-data"
