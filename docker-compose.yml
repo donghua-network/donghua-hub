@@ -5,7 +5,7 @@ services:
       ports:
         - '8181:80'
       volumes:
-        - 'dhroot:/var/www'
+        - 'dhroot:/var/www/html'
       depends_on:
         - mariadb
     mariadb:
