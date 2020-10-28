@@ -90,7 +90,7 @@ $(document).ready(function(){
             table=getTable('.table-responsive');
             $('#data').loadData({'action': clickBtnValue, 'loadtxt': 'Exporting', 'table':table, 'view':'pdf-viewer'}, 'view');
         }else if(clickBtnValue=='log in'){
-            $('#login').formData({ 'loadtxt': 'Loading', 'responsediv':'#block'});
+            $('#login').formData({ 'loadtxt': 'Loading', 'responsediv':'#block'}, afterAuth);
         }else{
             $('#form').formData({'action': clickBtnValue, 'loadtxt': 'Loading', 'responsediv':'#data'}, afterAjax);
         }
