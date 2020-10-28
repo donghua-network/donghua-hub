@@ -1,13 +1,16 @@
 <?php
-namespace controller;
+namespace controller\services;
 class discord {
 
    public static function auth_redirect($client_id, $scopes) {
-      Router::redirect('https://discordapp.com/api/oauth2/authorize?' . http_build_query(array(
-         'response_type' => 'code',
-         'client_id'     => $client_id,
-         'scope'         => $scopes,
-      )));
+      print '<form id="authorize" method="GET" action="https://discordapp.com/api/oauth2/authorize">
+                    <input type="hidden" name="response_type" value="code"/>
+                    <input type="hidden" name="client_id" value="'.$client_id.'"/>
+                    <input type="hidden" name="scope" value="'.$scopes.'"/>
+                    <div class="spinner-border"></div>
+             </form>
+             ';
+
    }
 
    public static function auth($client_id, $client_secret, $scopes, $code) {
@@ -25,7 +28,7 @@ class discord {
    public static function user_info($token) {
       $request = \model\form::curl('https://discordapp.com/api/users/@me', array(
          'authorization: Bearer ' . $token
-      ), 'auth');
+      ), false);
       return ($request['status'] === 200 ? json_decode($request['data'], true) : false);
    }
 

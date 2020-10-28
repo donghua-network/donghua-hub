@@ -1,9 +1,11 @@
 <?php
-namespace model;
+namespace model\services;
+use model\oauth;
 
 class discord extends oauth{
     const scopes='identify';
-    var $hiddenFields=array('Service' => 'discord');
+    var $hiddenFields=array('Service' => 'discord'),
+        $fieldProperties=array('clientID'=>'required','Client_Secret'=>'required');
 
     function __construct (){
         parent::__construct($this->table, $this->columns);

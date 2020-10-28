@@ -3,8 +3,9 @@ namespace controller;
 class ajax implements IController{
     function __construct(){
         if(isset($_POST['class'])){
-            $class='\\model\\'.$_POST['class'];
-            $this->form=new $class();
+            $class=($_POST['class']=='discord')?'services\\'.$_POST['class']:$_POST['class'];
+            $model='\\model\\'.$class;
+            $form=new $model();
         }
     }
 

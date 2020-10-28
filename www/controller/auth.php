@@ -1,8 +1,8 @@
 <?php
-$discord = new \model\discord();
-$auth = \controller\discord::auth($discord->clientID(), $discord->secret(), \model\discord::scopes, $_GET['code']);
+$discord = new \model\services\discord();
+$auth = \controller\services\discord::auth($discord->clientID(), $discord->secret(), \model\services\discord::scopes, $_GET['code']);
 if ( $auth ) {
-    $user = \controller\discord::user_info($auth['access_token']);
+    $user = \controller\services\discord::user_info($auth['access_token']);
     if ( $user ) {
         $_SESSION['discord']['access-token']     = $auth['access_token'];
         $_SESSION['discord']['refresh-token']    = $auth['refresh_token'];

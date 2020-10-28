@@ -1,6 +1,7 @@
 <?php
-$class='\\model\\'.$_POST['class'];
-$form=new $class();
+$class=($_POST['class']=='discord')?'services\\'.$_POST['class']:$_POST['class'];
+$model='\\model\\'.$class;
+$form=new $model();
 ?>
 <form id="form" class="form element-block" method="POST" action="ajax">
     <div class="form-fields">
