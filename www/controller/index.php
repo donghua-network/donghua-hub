@@ -1,10 +1,11 @@
 <?php
 require('autoloader.php');
 if(!empty($_POST['controller'])){
-    if($_POST['controller']=='view')
+    if(isset($_POST['view']))
         require($_POST['controller'].'/'.$_POST['view'].'.php');
-    else
-        require($_POST['controller'].'.php');
+    else{
+        controller\Request::loadController();
+    }
 }else{
     $router = new controller\Router(new controller\Request);
     //localhost/service/test/params/send/after/test
