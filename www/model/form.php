@@ -15,7 +15,7 @@ class form extends table{
     function formInputFields(){
         //create input fields depending on the values in the database
         foreach($this->columns as $key => $value){
-           if(array_key_exists($key, $this->hiddenFields)){
+            if(array_key_exists($key, $this->hiddenFields)){
                 $fields .= '<input class="form-control mr-sm-2" name="'.strtolower($key).'" type="hidden" value="'.$this->hiddenFields[$key].'">';
             }elseif(array_key_exists($key, $this->fieldProperties)){
                 $fields.='

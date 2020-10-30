@@ -14,9 +14,6 @@ if(!empty($_POST['controller'])){
         return 'test';
         controller\Router::redirect($request->requestScheme.'://'.$request->httpHost);
     });
-    $router->get('/home', function($request){
-        require('view/index.html');
-    });
     $router->get('/service/auth', function($request){
         require('auth.php');
     });
