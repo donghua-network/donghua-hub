@@ -17,7 +17,6 @@ it will populate the www folder with the document root and the www-data with the
 ## todo
 - edit entries
 - delete entries
-- user log in
 - user permission system
 - column aliases
 - specifying required fields

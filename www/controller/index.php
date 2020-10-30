@@ -15,13 +15,8 @@ if(!empty($_POST['controller'])){
         controller\Router::redirect($request->requestScheme.'://'.$request->httpHost);
     });
     $router->get('/service/auth', function($request){
-        require('auth.php');
-    });
-    $router->get('login', function($request){
-        require('login.php');
-    });
-    $router->get('logout', function($request){
-        require('logout.php');
+        $identity = new \controller\identity();
+        $identity->authenticate();
     });
     $router->post('/service/data', function($request){
         return json_encode($request->getBody());

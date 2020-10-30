@@ -54,6 +54,10 @@ $(document).ready(function(){
         $('#authorize').submit();
     }
 
+    function afterLogout(){
+        $('#block').loadData({'loadtxt':'Creating form', 'view':'home'}, 'view', afterFormgen);
+    }
+
     function showfilter(){
         table=$('.table-responsive').html();
         if(table!==undefined)
@@ -91,6 +95,8 @@ $(document).ready(function(){
             $('#data').loadData({'action': clickBtnValue, 'loadtxt': 'Exporting', 'table':table, 'view':'pdf-viewer'}, 'view');
         }else if(clickBtnValue=='log in'){
             $('#login').formData({ 'loadtxt': 'Loading', 'responsediv':'#block'}, afterAuth);
+        }else if(clickBtnValue=='log out'){
+            $('#login').formData({ 'loadtxt': 'Loading', 'responsediv':'#block'}, afterLogout);
         }else{
             $('#form').formData({'action': clickBtnValue, 'loadtxt': 'Loading', 'responsediv':'#data'}, afterAjax);
         }
