@@ -76,7 +76,7 @@ $(document).ready(function(){
             $('#data').loadData(data, 'ajax');
         }else if(clickBtnValue=='save'){
             data['responsediv'] = '#data';
-            $('#date').formData(data, afterAjax);
+            $('#form').formData(data, afterAjax);
         }else{
             $('#data').loadData(data, 'ajax', afterAjax);
         }

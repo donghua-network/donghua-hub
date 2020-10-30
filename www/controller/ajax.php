@@ -5,7 +5,7 @@ class ajax implements IController{
         if(isset($_POST['class'])){
             $class=($_POST['class']=='discord')?'services\\'.$_POST['class']:$_POST['class'];
             $model='\\model\\'.$class;
-            $form=new $model();
+            $this->form=new $model();
         }
     }
 
